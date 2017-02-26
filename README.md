@@ -51,8 +51,6 @@ Hope that helps. Feel free to ask for clarification, or let me know how it goes 
 
 Take care,
 
-Rob
-
 Rob Myers
 Twitter: @agilecoach
 http://www.agileInstitute.com/
