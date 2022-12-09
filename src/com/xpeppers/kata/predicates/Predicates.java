@@ -1,4 +1,4 @@
-package com.xpeppers.kata;
+package com.xpeppers.kata.predicates;
 
 import java.util.function.IntPredicate;
 

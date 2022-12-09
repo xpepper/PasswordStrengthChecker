@@ -7,7 +7,7 @@ import org.junit.Test;
 
 public class PasswordStrengthCheckerExamples {
 
-    private PasswordStrengthChecker checker = PasswordStrengthChecker.basic();
+    private PasswordStrengthChecker checker = PasswordStrengthChecker.createForBasicPassword();
 
     @Test
     public void at_least_one_uppercase_character() {
@@ -36,14 +36,14 @@ public class PasswordStrengthCheckerExamples {
 
     @Test
     public void longer_than_10_characters_for_admins() throws Exception {
-        PasswordStrengthChecker checker = PasswordStrengthChecker.forAdmin();
+        PasswordStrengthChecker checker = PasswordStrengthChecker.createForAdminPassword();
         assertTrue(checker.isAcceptable("123456789!A"));
         assertFalse(checker.isAcceptable("1234567A"));
     }
 
     @Test
     public void at_least_one_special_character_for_admins() throws Exception {
-        PasswordStrengthChecker checker = PasswordStrengthChecker.forAdmin();
+        PasswordStrengthChecker checker = PasswordStrengthChecker.createForAdminPassword();
         assertTrue(checker.isAcceptable("123456789A!"));
         assertFalse(checker.isAcceptable("1234567890A"));
     }
