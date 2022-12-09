@@ -10,21 +10,21 @@ import org.junit.Test;
 public class PasswordStrengthCheckerTest {
 
     @Test
-    public void with_no_rules_every_password_will_be_fine() {
+    public void with_no_rules_password_passes() {
         PasswordStrengthChecker checker = new PasswordStrengthChecker(new ArrayList<Rule>());
-        assertTrue(checker.isAcceptable("everything_will_be_just_fine"));
+        assertTrue(checker.accepts("everything_will_be_just_fine"));
     }
 
     @Test
-    public void with_always_failing_rule_every_password_will_be_rejected() {
-        PasswordStrengthChecker checker = new PasswordStrengthChecker(asList(string -> false));
-        assertFalse(checker.isAcceptable("everything_will_be_rejected"));
+    public void with_always_failing_rule_password_will_be_rejected() {
+        PasswordStrengthChecker checker = new PasswordStrengthChecker(asList(password -> false));
+        assertFalse(checker.accepts("everything_will_be_rejected"));
     }
 
     @Test
-    public void with_always_failing_rule_every_password_will_be_fine() {
-        PasswordStrengthChecker checker = new PasswordStrengthChecker(asList(string -> true));
-        assertTrue(checker.isAcceptable("everything_will_be_fine"));
+    public void with_always_succeeding_rule_password_will_pass() {
+        PasswordStrengthChecker checker = new PasswordStrengthChecker(asList(password -> true));
+        assertTrue(checker.accepts("everything_will_be_fine"));
     }
 
     @Test
@@ -32,7 +32,7 @@ public class PasswordStrengthCheckerTest {
         SpyRule rule = new SpyRule();
         PasswordStrengthChecker checker = new PasswordStrengthChecker(asList(rule));
         assertFalse(rule.hasBeenCalled);
-        checker.isAcceptable("anything");
+        checker.accepts("anything");
         assertTrue(rule.hasBeenCalled);
     }
 
@@ -40,7 +40,7 @@ public class PasswordStrengthCheckerTest {
         public boolean hasBeenCalled = false;
 
         @Override
-        public boolean isSatisfiedOn(String string) {
+        public boolean isSatisfiedOn(String password) {
             this.hasBeenCalled = true;
             return true;
         }
